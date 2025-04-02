@@ -52,6 +52,16 @@ int * matrixByVectorProduct(int *matrix, int *vector, int n, int m) {
 
 int main() {
 
+    // Write header to csv file to contain results
+    FILE *file;
+    file = fopen("task1_col-major.csv", "w");
+    if (file == NULL) {
+        fprintf(stderr, "Failed to open file for writing\n");
+        return 1;
+    }
+    fprintf(file, "n,time\n");
+    fclose(file);
+
     for (int i = 1; i <= 18; i++) {
         int n = (int)pow(2, i);
         int *colMatrix = columnMajorMatrix(n, n);
@@ -68,6 +78,14 @@ int main() {
         end = clock();
         time = (double)(end - start) / CLOCKS_PER_SEC * 1000000; // in microseconds
         printf("Column Major Matrix: n = %d, time taken = %.3f us\n", n, time);
+        // Write results to csv file
+        file = fopen("task1_col-major.csv", "a");
+        if (file == NULL) {
+            fprintf(stderr, "Failed to open file for writing\n");
+        } else {
+            fprintf(file, "%d,%.3f\n", n, time);
+            fclose(file);
+        }
         free(result);
         free(colMatrix);
         free(vector);
