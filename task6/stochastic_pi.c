@@ -2,16 +2,16 @@
 #include "stdlib.h"
 #include "math.h"
 #include "omp.h"
+#include <time.h>
 
 double monte_carlo_pi(int n)
 {
     int count = 0;
-    double x, y;
     unsigned int seed = 0; // Initialize seed for random number generation
     // Use a fixed seed for reproducibility
     for (int i = 0; i < n; i++) {
-        x = (double)rand_r(&seed) / RAND_MAX;
-        y = (double)rand_r(&seed) / RAND_MAX;
+        double x = (double)rand_r(&seed) / RAND_MAX;
+        double y = (double)rand_r(&seed) / RAND_MAX;
         if (x * x + y * y <= 1.0) {
             count++;
         }
@@ -52,7 +52,6 @@ int main()
             fclose(file);
         }
     }
-    fclose(file);
     printf("Results written to monte_carlo_pi.csv\n");
 
     return 0;
