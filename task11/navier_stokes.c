@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <math.h>
 
-#define N 32             // Tamanho da grade (NxNxN)
+#define N 16             // Tamanho da grade (NxNxN)
 #define STEPS 1000       // Número de passos de tempo
 #define DT 0.01          // Intervalo de tempo
 #define DX 1.0           // Espaçamento da grade
@@ -111,13 +111,6 @@ int main() {
         return 1;
     }
 
-    // Inicialização: fluido parado
-    for (int i = 0; i < size; i++) {
-        u[i] = 0.0;
-        v[i] = 0.0;
-        w[i] = 0.0;
-    }
-
     for (int t = 0; t < STEPS; t++) {
         if (t == 10) {
             printf("Adicionando perturbação...\n");
@@ -131,12 +124,12 @@ int main() {
         swap(&w, &w_new);
 
         // Salvar resultados a cada 100 passos
-        if (t % 100 == 0) {
+        if (t % 10 == 0) {
             printf("Salvando resultados no passo %d...\n", t);
             save_to_file(filename, u, v, w, t);
         }
 
-        if (t % 100 == 0) {
+        if (t % 10 == 0) {
             printf("Passo %d concluído.\n", t);
             // printff("Velocidade no passo %d: u=%.5f, v=%.5f, w=%.5f\n", t, u[IX(N/2, N/2, N/2)], v[IX(N/2, N/2, N/2)], w[IX(N/2, N/2, N/2)]);
         }

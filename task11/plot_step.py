@@ -15,12 +15,12 @@ data = {
     't': [0, 0, 0, 0, 0, 0, 0, 0, 0]  # Time is constant
 }
 df = pd.read_csv('resultados.csv')
-df = df[df.t == 0]  # Filter for time = 0
+df = df[df.t == 10]  # Filter for time = 0
 
 import pdb; pdb.set_trace()
 # Sample the data
-sample_rate = 1000  # Adjust this to sample every nth point
-df = df.iloc[::sample_rate, :]
+# sample_rate = 10  # Adjust this to sample every nth point
+# df = df.iloc[::sample_rate, :]
 import pdb; pdb.set_trace()
 
 
@@ -46,4 +46,5 @@ ax.set_zlabel('Z (k)')
 ax.set_title('3D Navier-Stokes Velocity Field')
 
 # Show the plot
-plt.savefig('3D_velocity_field.png', dpi=300)
+plt.show()
+# plt.savefig('3D_velocity_field.png', dpi=300)
